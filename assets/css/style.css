@@ -60,9 +60,12 @@ table td span {
     text-align: center;
 }
 table td.remove span{
-    height: 2rem;
-    width: 2rem;
+    height: .6rem;
+    width: .6rem;
     background-image: url("../icon/delete.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     display: block;
 }
 
