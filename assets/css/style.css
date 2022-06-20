@@ -59,6 +59,13 @@ table td span {
     display: block;
     text-align: center;
 }
+table td.remove span{
+    height: 2rem;
+    width: 2rem;
+    background-image: url("../icon/delete.png");
+    display: block;
+}
+
 
 .modale.show {
     display: block;

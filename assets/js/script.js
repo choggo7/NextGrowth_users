@@ -27,28 +27,25 @@ let users = [
         registrationNumber: "3576",
     }
 ]
-
 const myTable = document.createElement("table");
-
 const rows = (user, table) => {
 
     var table = document.getElementById("table-users");
     var row = table.insertRow(-1);
     user.createdDate = dateForma(user.createdDate)
-    let btnDelete = document.createElement("a")
+    let btnDelete = document.createElement("span")
 
     Object.values(user).map((item, index) => {
         let cell = row.insertCell(index)
         cell.innerHTML = item
-
     })
+
     let cellDelete = row.insertCell(-1)
-    cellDelete.className = "poop"
+    cellDelete.className = "remove"
+    cellDelete.onclick = () => table.deleteRow(cellDelete.parentElement.rowIndex)
     cellDelete.appendChild(btnDelete)
     validation(row)
-
 }
-
 const dateForma = date => {
     date = new Date(date)
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
@@ -77,44 +74,51 @@ const validation = row => {
     cell.innerText = ""
     cell.appendChild(span)
 }
-
 const loadUsers = () => {
     users.forEach(user => {
         rows(user)
     })
 }
-
 const modaleToggle = () => {
     const modale = document.getElementsByClassName("modale")[0]
     modale.classList.toggle("show")
 }
-
-window.addEventListener("click", e =>{
+window.addEventListener("click", e => {
     const modal = document.getElementsByClassName("modale")[0]
     if (e.target === modal) {
         modaleToggle();
     }
 });
-
 document.getElementById("add-user").onsubmit = (e) => {
     e.preventDefault()
     const inputV = {}
-    Object.values(e.target.elements).map((input)=>{
-        if(e.submitter !== input){
+    Object.values(e.target.elements).map((input) => {
+        if (e.submitter !== input) {
             inputV[input.name] = input.value
         }
     })
     inputV["id"] = generateId()
-    console.log(inputV)
-    rows(inputV)
+    rows(indexUser(inputV))
+    modaleToggle()
 }
-
-const generateId = () =>{
+const generateId = () => {
     let newId = Math.floor((Math.random() * 999999999) + 1)
     ids = []
     users.map(user => {
         ids.push(user.id)
     })
-    return (!ids.includes(newId))? newId : generateId() 
-    
+    return (!ids.includes(newId)) ? newId : generateId()
+
 }
+const indexUser = (user) => {
+    const newobj = {}
+    let entries = Object.entries(users[0])
+    entries.map(([key, val] = entry) => {
+        if(user.hasOwnProperty(key)){
+            newobj[key] = user[key]
+        }
+    });
+    return newobj
+}
+
+
