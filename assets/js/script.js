@@ -35,12 +35,16 @@ const rows = (user, table) => {
     var table = document.getElementById("table-users");
     var row = table.insertRow(-1);
     user.createdDate = dateForma(user.createdDate)
+    let btnDelete = document.createElement("a")
 
     Object.values(user).map((item, index) => {
         let cell = row.insertCell(index)
         cell.innerHTML = item
 
     })
+    let cellDelete = row.insertCell(-1)
+    cellDelete.className = "poop"
+    cellDelete.appendChild(btnDelete)
     validation(row)
 
 }
@@ -74,6 +78,43 @@ const validation = row => {
     cell.appendChild(span)
 }
 
-users.forEach(user => {
-    rows(user)
-})
+const loadUsers = () => {
+    users.forEach(user => {
+        rows(user)
+    })
+}
+
+const modaleToggle = () => {
+    const modale = document.getElementsByClassName("modale")[0]
+    modale.classList.toggle("show")
+}
+
+window.addEventListener("click", e =>{
+    const modal = document.getElementsByClassName("modale")[0]
+    if (e.target === modal) {
+        modaleToggle();
+    }
+});
+
+document.getElementById("add-user").onsubmit = (e) => {
+    e.preventDefault()
+    const inputV = {}
+    Object.values(e.target.elements).map((input)=>{
+        if(e.submitter !== input){
+            inputV[input.name] = input.value
+        }
+    })
+    inputV["id"] = generateId()
+    console.log(inputV)
+    rows(inputV)
+}
+
+const generateId = () =>{
+    let newId = Math.floor((Math.random() * 999999999) + 1)
+    ids = []
+    users.map(user => {
+        ids.push(user.id)
+    })
+    return (!ids.includes(newId))? newId : generateId() 
+    
+}

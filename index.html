@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,51 +7,57 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Document</title>
 </head>
-<body>
+
+<body onload="loadUsers()">
 
     <div class="container">
         <table id="table-users">
             <tr>
-                <th>name 1</th>
-                <th>name 2</th>
+                <th>id</th>
+                <th>date de creation</th>
                 <th>etat</th>
-                <th>name 4</th>
-                <th>name 5</th>
-                <th>name 6</th>
-                <th>name 7</th>
-                <th>name 8</th>
+                <th>nom</th>
+                <th>prenom</th>
+                <th>nom d'utilisateur</th>
+                <th>matricule</th>
+                <th>action</th>
             </tr>
-            <tr>
-                <td>vale 1</td>
-                <td>vale 2</td>
-                <td> <span class="valide">vale 3</span> </td>
-                <td>vale 4</td>
-                <td>vale 5</td>
-                <td>vale 6</td>
-                <td>vale 7</td>
-                <td>vale 8</td>
-            </tr>
+
 
         </table>
     </div>
 
     <div class="container">
-        <a href="#" class="btn">ajouter un utilisateur</a>
+        <a onclick="modaleToggle(this)" href="#" class="btn close">ajouter un utilisateur</a>
     </div>
 
+
     <div class="modale">
-        <div class="head"><div class="title"> ajouter d'utilisateurs </div></div>
-        <form action="">
-            <div class="input-container"><label for="">poop</label><input type="text"></div>
-            <div class="input-container"><label for="">poop</label><input type="text"></div>
-            <div class="input-container"><label for="">poop</label><input type="text"></div>
-            <div class="input-container"><label for="">poop</label><input type="text"></div>
-            <div class="input-container"><label for="">poop</label><input type="date"></div>
-            <div class="input-container"><label for="">poop</label><input type="text"></div>
-            <div class="btn-container"><a href="" class="btn">enregistrer</a></div>
-        </form>
+        <div class="content">
+            <div class="head">
+                <div class="title"> ajouter d'utilisateurs </div>
+            </div>
+            <form id="add-user" action="">
+                <div class="input-container"><label for="">nom</label><input name="firstName" type="text"></div>
+                <div class="input-container"><label for="">prenom</label><input name="lastName" type="text"></div>
+                <div class="input-container">
+                    <label for="">etat</label>
+                    <select  name="status">
+                        <option value="En validation">En validation</option>
+                        <option value="Validé">Validé</option>
+                        <option value="Rejeté">Rejeté</option>
+                    </select>
+                </div>
+                <div class="input-container"><label for="">nom d'utilisateur</label><input name="userName" type="text"></div>
+                <div class="input-container"><label for="">date de creation</label><input name="createdDate" type="date"></div>
+                <div class="input-container"><label for="">matricule</label><input name="registrationNumber" type="number"></div>
+                <div class="btn-container"> <input class="btn" type="submit" value="enregistrer"> </div>
+            </form>
+        </div>
     </div>
-    
-    <script   src="./assets/js/script.js"></script>
+
+
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
